@@ -1,0 +1,189 @@
+From ae9b3af4446d713a8768eedf303390e8c4b7defe Mon Sep 17 00:00:00 2001
+From: Andy Zhou <azhou@nicira.com>
+Date: Thu, 17 Oct 2013 14:49:52 -0700
+Subject: [mega mask stats v4 2/2] dpif-linux: collect and display mega flow
+ mask stats
+
+Signed-off-by: Andy Zhou <azhou@nicira.com>
+----
+v1-v2:
+	* format fixes
+	* added contents to ovs-dpctl man page
+	* allow mask count to be zero.
+
+v2->v3:
+	* Avoid divide by zero if n_pkts is zero.
+
+v3->v4:
+	* Minor style changes
+
+---
+ NEWS                     |    2 ++
+ lib/dpif-linux.c         |   18 +++++++++++++++++-
+ lib/dpif-netdev.c        |    2 ++
+ lib/dpif.h               |    3 +++
+ utilities/ovs-dpctl.8.in |   19 +++++++++++++++++++
+ utilities/ovs-dpctl.c    |    8 ++++++++
+ 6 files changed, 51 insertions(+), 1 deletion(-)
+
+diff --git a/NEWS b/NEWS
+index 36546f4..ffd1741 100644
+--- a/NEWS
++++ b/NEWS
+@@ -8,6 +8,8 @@ Post-v2.0.0
+      * The OpenFlow 1.1+ "Write-Actions" instruction is now supported.
+    - ovs-vswitchd.conf.db.5 man page will contain graphviz/dot
+      diagram only if graphviz package was installed at the build time.
++   - ovs-dpctl:
++     The "show" command also displays mega flow mask stats.
+ 
+ 
+ v2.0.0 - 15 Oct 2013
+diff --git a/lib/dpif-linux.c b/lib/dpif-linux.c
+index 6f75f57..42958d3 100644
+--- a/lib/dpif-linux.c
++++ b/lib/dpif-linux.c
+@@ -74,6 +74,8 @@ struct dpif_linux_dp {
+     const char *name;                  /* OVS_DP_ATTR_NAME. */
+     const uint32_t *upcall_pid;        /* OVS_DP_UPCALL_PID. */
+     struct ovs_dp_stats stats;         /* OVS_DP_ATTR_STATS. */
++    struct ovs_dp_megaflow_stats megaflow_stats;
++                                       /* OVS_DP_ATTR_MEGAFLOW_STATS.*/
+ };
+ 
+ static void dpif_linux_dp_init(struct dpif_linux_dp *);
+@@ -411,6 +413,8 @@ dpif_linux_get_stats(const struct dpif *dpif_, struct dpif_dp_stats *stats)
+         stats->n_missed = dp.stats.n_missed;
+         stats->n_lost   = dp.stats.n_lost;
+         stats->n_flows  = dp.stats.n_flows;
++        stats->n_masks  = dp.megaflow_stats.n_masks;
++        stats->n_mask_hit  = dp.megaflow_stats.n_mask_hit;
+         ofpbuf_delete(buf);
+     }
+     return error;
+@@ -1770,6 +1774,9 @@ dpif_linux_dp_from_ofpbuf(struct dpif_linux_dp *dp, const struct ofpbuf *buf)
+         [OVS_DP_ATTR_NAME] = { .type = NL_A_STRING, .max_len = IFNAMSIZ },
+         [OVS_DP_ATTR_STATS] = { NL_POLICY_FOR(struct ovs_dp_stats),
+                                 .optional = true },
++        [OVS_DP_ATTR_MEGAFLOW_STATS] = {
++                        NL_POLICY_FOR(struct ovs_dp_megaflow_stats),
++                        .optional = true },
+     };
+ 
+     struct nlattr *a[ARRAY_SIZE(ovs_datapath_policy)];
+@@ -1801,6 +1808,13 @@ dpif_linux_dp_from_ofpbuf(struct dpif_linux_dp *dp, const struct ofpbuf *buf)
+                sizeof dp->stats);
+     }
+ 
++    if (a[OVS_DP_ATTR_MEGAFLOW_STATS]) {
++        /* Can't use structure assignment because Netlink doesn't ensure
++         * sufficient alignment for 64-bit members. */
++        memcpy(&dp->megaflow_stats, nl_attr_get(a[OVS_DP_ATTR_MEGAFLOW_STATS]),
++               sizeof dp->megaflow_stats);
++    }
++
+     return 0;
+ }
+ 
+@@ -1833,6 +1847,8 @@ static void
+ dpif_linux_dp_init(struct dpif_linux_dp *dp)
+ {
+     memset(dp, 0, sizeof *dp);
++    dp->megaflow_stats.n_masks = UINT32_MAX;
++    dp->megaflow_stats.n_mask_hit = UINT64_MAX;
+ }
+ 
+ static void
+@@ -1871,11 +1887,11 @@ dpif_linux_dp_transact(const struct dpif_linux_dp *request,
+     ofpbuf_delete(request_buf);
+ 
+     if (reply) {
++        dpif_linux_dp_init(reply);
+         if (!error) {
+             error = dpif_linux_dp_from_ofpbuf(reply, *bufp);
+         }
+         if (error) {
+-            dpif_linux_dp_init(reply);
+             ofpbuf_delete(*bufp);
+             *bufp = NULL;
+         }
+diff --git a/lib/dpif-netdev.c b/lib/dpif-netdev.c
+index 0f6a71c..370691e 100644
+--- a/lib/dpif-netdev.c
++++ b/lib/dpif-netdev.c
+@@ -394,6 +394,8 @@ dpif_netdev_get_stats(const struct dpif *dpif, struct dpif_dp_stats *stats)
+     stats->n_hit = dp->n_hit;
+     stats->n_missed = dp->n_missed;
+     stats->n_lost = dp->n_lost;
++    stats->n_masks = UINT64_MAX;
++    stats->n_mask_hit = UINT64_MAX;
+     ovs_mutex_unlock(&dp_netdev_mutex);
+ 
+     return 0;
+diff --git a/lib/dpif.h b/lib/dpif.h
+index 8996c0a..ab69c1c 100644
+--- a/lib/dpif.h
++++ b/lib/dpif.h
+@@ -387,6 +387,9 @@ struct dpif_dp_stats {
+     uint64_t n_missed;          /* Number of flow table misses. */
+     uint64_t n_lost;            /* Number of misses not sent to userspace. */
+     uint64_t n_flows;           /* Number of flows present. */
++    uint64_t n_masks;           /* Number of mega flow masks. */
++    uint64_t n_mask_hit;        /* Number of mega flow masks visited for
++                                   flow table matches. */
+ };
+ int dpif_get_dp_stats(const struct dpif *, struct dpif_dp_stats *);
+ 
+diff --git a/utilities/ovs-dpctl.8.in b/utilities/ovs-dpctl.8.in
+index 35d1be5..5a0dd70 100644
+--- a/utilities/ovs-dpctl.8.in
++++ b/utilities/ovs-dpctl.8.in
+@@ -101,6 +101,25 @@ port is identified as port 0.)  If \fB\-s\fR or \fB\-\-statistics\fR
+ is specified, then packet and byte counters are also printed for each
+ port.
+ .IP
++The datapath numbers consists of flow stats and mega flow mask stats.
++.IP
++The "lookups" row displays three stats related to flow lookup triggered
++by processing incoming packets in the datapath. "hit" displays number
++of packets matches existing flows. "missed" displays the number of
++packets not matching any existing flow and require user space processing.
++"lost" displays number of packets destined for user space process but
++subsequently dropped before reaching userspace. The sum of "hit" and "miss"
++equals to the total number of packets datapath processed.
++.IP
++The "flows" row displays the number of flows in datapath.
++.IP
++The "masks" row displays the mega flow mask stats. This row is omitted
++for datapath not implementing mega flow. "hit" displays the total number
++of masks visited for matching incoming packets. "total" displays number of
++masks in the datapath. "hit/pkt" displays the average number of masks
++visited per packet; the ratio between "hit" and total number of
++packets processed by the datapath".
++.IP
+ If one or more datapaths are specified, information on only those
+ datapaths are displayed.  Otherwise, \fBovs\-dpctl\fR displays information
+ about all configured datapaths.
+diff --git a/utilities/ovs-dpctl.c b/utilities/ovs-dpctl.c
+index e11e102..78475e7 100644
+--- a/utilities/ovs-dpctl.c
++++ b/utilities/ovs-dpctl.c
+@@ -563,7 +563,15 @@ show_dpif(struct dpif *dpif)
+         printf("\tlookups: hit:%"PRIu64" missed:%"PRIu64" lost:%"PRIu64"\n"
+                "\tflows: %"PRIu64"\n",
+                stats.n_hit, stats.n_missed, stats.n_lost, stats.n_flows);
++        if (stats.n_masks != UINT64_MAX) {
++            uint64_t n_pkts = stats.n_hit + stats.n_missed;
++            double avg = n_pkts ? (double) stats.n_mask_hit / n_pkts : 0.0;
++
++            printf("\tmasks: hit:%"PRIu64" total:%"PRIu64" hit/pkt:%.2f\n",
++                   stats.n_mask_hit, stats.n_masks, avg);
++        }
+     }
++
+     DPIF_PORT_FOR_EACH (&dpif_port, &dump, dpif) {
+         printf("\tport %u: %s", dpif_port.port_no, dpif_port.name);
+ 
+-- 
+1.7.9.5
+

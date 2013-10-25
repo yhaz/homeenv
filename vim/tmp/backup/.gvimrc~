@@ -1,0 +1,10 @@
+" From www.jukie.net/bart/blog/vim-and-linux-coding-style
+"
+"
+
+set background=dark
+colorscheme solarized
+
+color badwolf
+
+set guifont=ubuntu\ mono\ 10

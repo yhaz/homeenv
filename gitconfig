@@ -1,0 +1,52 @@
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 700x510+85+27
+	history-view-vpane-position = 129
+	file-view-vpane-position = 210
+	main-window-view = FileView
+
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	rb = 'rebase -i origin/master'
+	unstage = 'reset HEAD --'
+	last = 'log -l HEAD'
+	visual = '!gitk'
+	fp = 'format-patch'
+
+[user]
+	name="Andy Zhou"
+	email="azhou@nicira.com"
+	
+[sendemail]
+	#suppresscc = self 
+	chainreplyto = false
+	from = Andy Zhou <azhou@nicira.com>
+	to = dev@openvswitch.com
+	smtpserver = smtp.gmail.com
+	smtpuser = azhou@nicira.com
+	smtpssl
+
+[core]
+	editor=vim
+  	whitespace = trailing-space,space-before-tab
+
+[difftool]
+tool = meld
+prompt = false
+
+[color]
+        ui = auto
+        interactive = auto
+        diff = auto
+
+
+
+#[alias]
+#  pr = push review HEAD:refs/for/master
+#	    pr = push review HEAD:refs/for/mathilda
+#	    [remote "review"]
+#	          url = ssh://azhou@review.nicira.com:29418/ovs-int
+#	          fetch = +refs/heads/:refs/remotes/review/

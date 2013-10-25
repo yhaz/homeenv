@@ -1,0 +1,1 @@
+git  archive  --remote=azhou@repo.nicira.eng.vmware.com:/srv/git/buildenv openvswitch/rhel61_x86_64 | ( cd rhel61 && tar xv)
