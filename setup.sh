@@ -43,3 +43,5 @@ file=gitconfig
 backup_install $file
 file=git-completion.bash
 cleanup_install $file ~/$file
+dir=bin
+backup_install $dir ~/$dir

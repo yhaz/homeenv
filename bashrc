@@ -95,7 +95,7 @@ fi
 # Auto completion 
 source ~/git-completion.bash
 
-export PATH=/root/bin:$PATH
+export PATH=~/bin:$PATH
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
