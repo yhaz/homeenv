@@ -1,0 +1,38 @@
+
+Setup apt-get
+================
+
+Precise (12.04) - Last update : Fri, 25 Oct 2013 15:13:57 UTC / Revision: 193402
+
+deb http://llvm.org/apt/precise/ llvm-toolchain-precise main
+deb-src http://llvm.org/apt/precise/ llvm-toolchain-precise main
+
+Quantal (12.10) - Last update : Fri, 25 Oct 2013 16:21:41 UTC / Revision: 193404
+
+deb http://llvm.org/apt/quantal/ llvm-toolchain-quantal main
+deb-src http://llvm.org/apt/quantal/ llvm-toolchain-quantal main
+
+Raring (13.04) - Last update : Fri, 25 Oct 2013 17:42:30 UTC / Revision: 193412
+
+deb http://llvm.org/apt/raring/ llvm-toolchain-raring main
+deb-src http://llvm.org/apt/raring/ llvm-toolchain-raring main
+
+Saucy (13.10) - Last update : Fri, 25 Oct 2013 18:39:30 UTC / Revision: 193412
+
+deb http://llvm.org/apt/saucy/ llvm-toolchain-saucy main
+deb-src http://llvm.org/apt/saucy/ llvm-toolchain-saucy main
+
+
+Install
+===========
+To retrieve the archive signature:
+
+wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key|sudo apt-key add -
+
+To install just clang and lldb:
+
+apt-get install clang-3.4 lldb-3.4
+
+To install all packages:
+
+apt-get install clang-3.4 clang-3.4-doc libclang-common-3.4-dev libclang-3.4-dev libclang1-3.4 libclang1-3.4-dbg libllvm-3.4-ocaml-dev libllvm3.4 libllvm3.4-dbg lldb-3.4 llvm-3.4 llvm-3.4-dev llvm-3.4-doc llvm-3.4-examples llvm-3.4-runtime clang-modernize-3.4 clang-format-3.4 python-clang-3.4 lldb-3.4-dev 
