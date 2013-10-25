@@ -116,6 +116,7 @@ function makecheck() {
 
 [ -z "$TMUX" ] && export TERM=xterm-256color
 
+export EDITOR=vim
 export VIM_STYLE=user
 ulimit -c unlimited
 alias cs='cscope -R'
