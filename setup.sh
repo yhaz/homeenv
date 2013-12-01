@@ -45,3 +45,5 @@ file=git-completion.bash
 cleanup_install $file ~/$file
 dir=bin
 backup_install $dir ~/$dir
+dir=vim
+cleanup_install $dir
