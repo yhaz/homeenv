@@ -1,7 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_cnt =6
 let g:netrw_dirhist_1='/root/.vim/bundle/vim-sensible'
 let g:netrw_dirhist_2='/root/projs/repo'
 let g:netrw_dirhist_3='/root/projs'
 let g:netrw_dirhist_4='/root/projs/repo/openvswitch/datapath'
 let g:netrw_dirhist_5='/root/projs/repo/openvswitch/lib'
+let g:netrw_dirhist_6='/home/azhou/projs/dpdk/examples/helloworld'
