@@ -2075,7 +2075,8 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 if has('gui_running')
     " GUI Vim
 
-    set guifont=Menlo\ Regular\ for\ Powerline:h12
+    #    set guifont=Menlo\ Regular\ for\ Powerline:h12
+    set guifont=Inconsolata\ 10
 
     " Remove all the UI cruft
     set go-=T

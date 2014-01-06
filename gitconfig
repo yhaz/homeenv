@@ -18,7 +18,7 @@
 
 [user]
 	name="Andy Zhou"
-	email="azhou@nicira.com"
+	email="andy@bubblewrapp.com"
 	
 [sendemail]
 	#suppresscc = self 

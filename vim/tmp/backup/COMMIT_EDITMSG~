@@ -1,23 +1,8 @@
-datapath: collect mega flow mask stats
+BW: cleanup SNI BE_LB_XX definitions
 
-----
-v1-v2:
-	* remove get_dp_megaflow_stats(), extend get_dp_stats() instead
-	* use __always_unused instead of GCC extensions
-	* fix comments
-	* fix the logic of counting n_mask_hit
-v2->v3:
-	* rename ovs_flow_tbl_lookup__() to __ovs_flow_tbl_lookup()
-	* Zero out padding bytes
-	* use u32 for n_masks
-
-v3->v4:
-	* syntax and Bug fixes
-
-Collect mega flow mask stats. ovs-dpctl show command can be used to
-display them.
-
-Signed-off-by: Andy Zhou <azhou@nicira.com>
+Bug fixes:
+The defintion was mixed up. It looks like one of the fixes did not
+get merged in.
 
 # Please enter the commit message for your changes. Lines starting
 # with '#' will be ignored, and an empty message aborts the commit.
@@ -25,20 +10,12 @@ Signed-off-by: Andy Zhou <azhou@nicira.com>
 # Changes to be committed:
 #   (use "git reset HEAD^1 <file>..." to unstage)
 #
-#	modified:   datapath/datapath.c
-#	modified:   datapath/datapath.h
-#	modified:   datapath/flow_table.c
-#	modified:   datapath/flow_table.h
-#	modified:   include/linux/openvswitch.h
+#	modified:   include/types/backend.h
+#	modified:   src/backend.c
+#	modified:   src/cfgparse.c
 #
 # Untracked files:
 #   (use "git add <file>..." to include in what will be committed)
 #
-#	0001-datapath-collect-mega-flow-mask-stats.patch
-#	0002-dpif-linux-collect-and-display-mega-flow-mask-stats.patch
-#	bin/
-#	conf.db
-#	log/
-#	run/
-#	sbin/
-#	share/
+#	cscope.out
+#	haproxy.cfg
