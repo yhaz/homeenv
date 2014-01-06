@@ -1,1 +1,0 @@
-git  archive --list --remote=azhou@repo.nicira.eng.vmware.com:/srv/git/buildenv openvswitch/
