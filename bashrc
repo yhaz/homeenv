@@ -118,8 +118,8 @@ function makecheck() {
 
 export EDITOR=vim
 export VIM_STYLE=user
+export CSCOPE_EDITOR=gvim
 ulimit -c unlimited
-alias cs='cscope -R'
 alias ts='tmux list-session'
 alias kt='killall tmux'
 alias gd='git difftool'
@@ -129,18 +129,23 @@ alias dev='cdwork; tmux-dev.sh; tmux attach -t dev'
 alias ckmod='lsmod |grep openv'
 alias killmod='rmmod openvswitch'
 alias remod='rmmod openvswitch; insmod datapath/linux/openvswitch.ko'
-alias rmpatch='rm -rf 000*'
 alias cdprojs='cd /root/projs'
-alias vi='vim'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 alias inch='/root/projs/git/buildscripts/inch'
 alias c='~/bin/compile_haproxy_by_hand.sh'
 alias t='~/bin/haproxy_cmdline.sh'
 
+#alias
+alias a='alias'
+alias va='vi ~/.bashrc'
+
 # APT 
+DEV_PKG_FILE=~/projs/homeenv/ubuntu/packages/devel
 alias aptg='sudo apt-get install'
 alias apts='sudo apt-cache search'
+alias apt-devel='aptg `cat $DEV_PKG_FILE`'
+alias vi-apt-devel='vim $DEV_PKG_FILE'
 
 #sudo 
 alias sv='sudo gvim'
@@ -149,4 +154,17 @@ alias reboot='sudo reboot'
 # ssh home 
 alias sshgr='ssh azhou@azhou-home.ssh22.net'
 alias sshmv='ssh azhou@azhou-mv.ssh22.net'
+
+#### C development
+#editors 
+alias vi='vim'
+alias gv='gvim'
+#cscope 
+alias cs='cscope -R'
+#git
+alias gitovs='git clone git://git.openvswitch.org/openvswitch'
+alias rmpatch='rm -rf 000*'
+
+# download patches
+alias downloadpatch='fetch-flagged-email.py -u azhou@nicira.com -p pig1head -f'
 

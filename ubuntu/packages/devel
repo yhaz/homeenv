@@ -1,0 +1,14 @@
+tkcvs
+git
+gitk
+build-essential
+python
+python-pip
+autoconf
+automake
+libtool
+patchutils
+apt-file
+terminator
+clang
+cscope
