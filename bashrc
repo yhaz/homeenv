@@ -137,3 +137,16 @@ alias pbpaste='xclip -selection clipboard -o'
 alias inch='/root/projs/git/buildscripts/inch'
 alias c='~/bin/compile_haproxy_by_hand.sh'
 alias t='~/bin/haproxy_cmdline.sh'
+
+# APT 
+alias aptg='sudo apt-get install'
+alias apts='sudo apt-cache search'
+
+#sudo 
+alias sv='sudo gvim'
+alias reboot='sudo reboot'
+
+# ssh home 
+alias sshgr='ssh azhou@azhou-home.ssh22.net'
+alias sshmv='ssh azhou@azhou-mv.ssh22.net'
+
