@@ -160,7 +160,8 @@ alias sshmv='ssh azhou@azhou-mv.ssh22.net'
 alias vi='vim'
 alias gv='gvim'
 #cscope 
-alias cs='cscope -R'
+alias cs='cscope -R *.[ch]'
+
 #git
 alias gitovs='git clone git://git.openvswitch.org/openvswitch'
 alias rmpatch='rm -rf 000*'
