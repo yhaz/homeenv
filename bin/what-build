@@ -1,0 +1,37 @@
+#! /bin/sh
+
+if test $# != 1; then
+    cat <<EOF
+$0: recover build number and platform from ovs-vswitchd core file
+usage: $0 CORE
+  where CORE is an ovs-vswitchd core file
+EOF
+    exit 1
+fi
+
+version=`strings "$1" | sed -n 's/^ovs-vswitchd (Open vSwitch) //p'`
+echo "version: $version"
+
+stamp=`strings "$1" | sed -n 's/^Compiled \([A-Z]\)/\1/p' | sed 1q`
+echo "  stamp: $stamp"
+
+time=`echo $stamp | sed 's/^.*\(..:..:..\)$/\1/'`
+echo "   time: $time"
+
+build=`echo "$version" | sed 's/.*\.//'`
+echo "  build: $build"
+
+cd /builds/openvswitch$build*
+echo "basedir: `pwd`"
+
+echo
+echo "Looking at Debian-based builds..."
+grep -l "$time" */ovs_files/ovs-vswitchd
+
+echo
+echo "Looking at RPM-based builds..."
+for d in */openvswitch-[0-9]*.rpm; do
+    if rpm2cpio $d | grep -q "$time" -; then
+        echo $d
+    fi
+done
