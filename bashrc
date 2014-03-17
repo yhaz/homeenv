@@ -169,3 +169,7 @@ alias rmpatch='rm -rf 000*'
 # download patches
 alias downloadpatch='fetch-flagged-email.py -u azhou@nicira.com -p pig1head -f'
 
+
+#GR home
+alias vncubuntu14='xvncviewer 127.0.0.1:5902'
+alias sshubuntu14='ssh azhou@ubuntu1404'
