@@ -4,12 +4,9 @@ set tabstop=8		" tabstops of 8
 set shiftwidth=8	" indents of 8
 set textwidth=78	" screen in 80 columns wide, wrap at 78
 
-
-
 set autoindent smartindent " turn on auto/smart indenting 
 set smarttab		   " Make <tab> and <backspace> smarter
 set backspace=eol,start,indent  " allow backspacing onver indent, eol & start
-
 
 
 filetype plugin indent on 
@@ -42,6 +39,12 @@ endif
 set formatoptions=tcqlron
 
 set cinoptions=:0,11,t0,g0   " see :h cinoptions-values  for details
+
+vnoremap <C-F6> :!indent -linux <CR>
+nnoremap <C-F6> :!indent -linux <CR>
+"nnoremap <C-F6> :!indent -linux
+"snoremap <C-F6> :!indent -linux
+"xnoremap <C-F6> :!indent -linux
 
 " set foldmethod=syntax
 
