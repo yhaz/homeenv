@@ -1157,8 +1157,8 @@ nmap <Leader>x <Plug>ToggleAutoCloseMappings
 " }}}
 " Clam {{{
 
-nnoremap ! :Clam<space>
-vnoremap ! :ClamVisual<space>
+nnoremap <leader>! :Clam<space>
+vnoremap <leader>! :ClamVisual<space>
 let g:clam_autoreturn = 1
 let g:clam_debug = 1
 
@@ -2075,8 +2075,7 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 if has('gui_running')
     " GUI Vim
 
-    #    set guifont=Menlo\ Regular\ for\ Powerline:h12
-    set guifont=Inconsolata\ 10
+    set guifont=Menlo\ Regular\ for\ Powerline:h12
 
     " Remove all the UI cruft
     set go-=T

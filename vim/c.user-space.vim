@@ -29,8 +29,8 @@ let b:undo_indent = "setl sw< ts< sts< et< tw< wrap< cin< cino< inde<"
 
 vnoremap <C-F6> :!indent -gnu -bad -br -nut -bs -npcs -nprs -cli0 -i4 -sob -l79<CR>
 nnoremap <C-F6> :!indent -gnu -bad -br -nut -bs -npcs -nprs -cli0 -i4 -sob -l79<CR>
-"nnoremap <C-F6> :!indent -linux
-"snoremap <C-F6> :!indent -linux
-"xnoremap <C-F6> :!indent -linux
+vnoremap <leader>c !c-comment-reformat.sh<CR>
+nnoremap <leader>c :!c-comment-reformat.sh<CR>
+"
 " set list
 " setlocal spell spelllang=en_us
