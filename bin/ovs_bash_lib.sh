@@ -5,7 +5,7 @@ function enable_echo
    ECHO=echo
 }
 
-function ovs_add_bond
+function ovs_add_bond_tcp
 {
    bridge=$1
    shift
@@ -15,6 +15,17 @@ function ovs_add_bond
 
    $ECHO ovs-vsctl add-bond $bridge $bond $ports bond_mode=balance-tcp lacp=active \
 	other-config:lacp-time=fast  other-config:bond-rebalance-interval=0
+}
+
+function ovs_add_bond_ab
+{
+   bridge=$1
+   shift
+   bond=$1
+   shift
+   ports=$@
+
+   $ECHO ovs-vsctl add-bond $bridge $bond $ports bond_mode=active-backup
 }
 
 function ovs_add_bridge

@@ -165,10 +165,7 @@ alias cs='cscope -R *.[ch]'
 #git
 alias gitovs='git clone git://git.openvswitch.org/openvswitch'
 alias rmpatch='rm -rf 000*'
-
-# download patches
-alias downloadpatch='fetch-flagged-email.py -u azhou@nicira.com -p pig1head -f'
-
+alias git-log-2014='git log --since="2014-1-1" |git shortlog -s -n'
 
 #GR home
 alias vncubuntu14='xvncviewer 127.0.0.1:5902'
