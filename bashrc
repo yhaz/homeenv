@@ -163,10 +163,14 @@ alias gv='gvim'
 alias cs='cscope -R *.[ch]'
 
 #git
-alias gitovs='git clone git://git.openvswitch.org/openvswitch'
+alias gitovs='git clone git@github.com:openvswitch/ovs'
 alias rmpatch='rm -rf 000*'
 alias git-log-2014='git log --since="2014-1-1" |git shortlog -s -n'
 
 #GR home
 alias vncubuntu14='xvncviewer 127.0.0.1:5902'
 alias sshubuntu14='ssh azhou@ubuntu1404'
+
+#office test machines
+alias wk1="ssh -X azhou@10.33.75.34"
+alias wk2="ssh -X azhou@10.33.75.35"
