@@ -43,7 +43,6 @@ prompt = false
         diff = auto
 
 
-
 #[alias]
 #  pr = push review HEAD:refs/for/master
 #	    pr = push review HEAD:refs/for/mathilda

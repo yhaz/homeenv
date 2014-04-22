@@ -1,0 +1,14 @@
+#Sample .pwclientrc file for the openvswitch project,
+# running on patchwork.openvswitch.org.
+#
+# Save this file to ~/.pwclientrc
+#
+[base]
+url: http://patchwork.openvswitch.org/xmlrpc/
+project: openvswitch
+#
+# Adding authentication parameters will allow you to use the 'update'
+# command on patches that you are allowed to edit.
+[auth]
+username: azhou
+password: azhounicira

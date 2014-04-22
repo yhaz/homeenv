@@ -13,3 +13,7 @@ terminator
 clang
 cscope
 ipython
+pkg-config
+libssl-dev
+gdb
+fakeroot

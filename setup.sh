@@ -39,6 +39,8 @@ file=bashrc
 backup_install $file
 file=vimrc
 backup_install $file
+file=pwclientrc
+backup_install $file
 file=gitconfig
 backup_install $file
 file=git-completion.bash
