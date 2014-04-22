@@ -23,7 +23,7 @@ setlocal textwidth=79
 setlocal wrap
 
 setlocal cindent
-setlocal cinoptions=h1,l1,g1,t0,i4,+4,(0,w1,W4
+setlocal cinoptions=h1,l1,g1,t0,i4,+4,(0,w1,W4,:0,
 
 let b:undo_indent = "setl sw< ts< sts< et< tw< wrap< cin< cino< inde<"
 
