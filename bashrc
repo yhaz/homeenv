@@ -118,7 +118,7 @@ function makecheck() {
 
 export EDITOR=vim
 export VIM_STYLE=user
-export CSCOPE_EDITOR=vim
+export CSCOPE_EDITOR=gv
 ulimit -c unlimited
 alias ts='tmux list-session'
 alias kt='killall tmux'
@@ -158,7 +158,7 @@ alias sshmv='ssh azhou@azhou-mv.ssh22.net'
 #### C development
 #editors 
 alias vi='vim'
-alias gv='gvim'
+alias gv='gvim 2>/dev/null'
 #cscope 
 alias cs='cscope -R *.[ch]'
 
