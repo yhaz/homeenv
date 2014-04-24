@@ -118,7 +118,7 @@ function makecheck() {
 
 export EDITOR=vim
 export VIM_STYLE=user
-export CSCOPE_EDITOR=gv
+export CSCOPE_EDITOR=vim
 ulimit -c unlimited
 alias ts='tmux list-session'
 alias kt='killall tmux'
