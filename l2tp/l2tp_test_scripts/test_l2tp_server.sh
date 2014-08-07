@@ -30,11 +30,7 @@ function run_l2tpconfig {
 #
 
 run_l2tpconfig system show version
-run_l2tpconfig tunnel create tunnel_name=one dest_ipaddr=10.1.1.2 
-run_l2tpconfig tunnel list 
-run_l2tpconfig ppp profile create profile_name=one local_ipaddr=10.3.1.1 remote_ipaddr=10.3.1.2
+run_l2tpconfig peer profile create profile_name=one peer_ipaddr=10.1.1.1 ppp_profile_name=one 
+run_l2tpconfig ppp profile create profile_name=one local_ipaddr=10.3.1.2 remote_ipaddr=10.3.1.1 auth_none=yes
 run_l2tpconfig ppp profile modify profile_name=default auth_none=yes
-run_l2tpconfig session create tunnel_name=one session_name=one ppp_profile_name=one
-run_l2tpconfig session list tunnel_name=one
-run_l2tpconfig session show tunnel_name=one session_name=one
 
