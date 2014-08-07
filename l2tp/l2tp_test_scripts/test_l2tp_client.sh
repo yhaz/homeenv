@@ -30,9 +30,10 @@ function run_l2tpconfig {
 #
 
 run_l2tpconfig system show version
+run_l2tpconfig ppp profile modify profile_name=deafult auth_esp=no auth_mschapv1=no auth_mschapv2=no
 run_l2tpconfig tunnel create tunnel_name=one dest_ipaddr=10.1.1.2 
 run_l2tpconfig tunnel list 
-run_l2tpconfig session create tunnel_name=one session_name=one ppp_profile_name=one
+run_l2tpconfig session create tunnel_name=one session_name=one user_name=andy user_password=andy
 run_l2tpconfig session list tunnel_name=one
 run_l2tpconfig session show tunnel_name=one session_name=one
 
