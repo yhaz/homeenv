@@ -39,6 +39,9 @@ stop_ip()
 	stop_link
 }
 
+modprobe l2tp_eth
+modprobe l2tp_ip
+
 case $1 in 
 	--start-udp)
 		start_udp
