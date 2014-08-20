@@ -8,7 +8,7 @@ function link {
 }
 
 function backup {
-	mv $1 ~/homeenv_backup	
+	mv $1 ~/homeenv_backup
 }
 
 function cleanup {
@@ -17,7 +17,7 @@ function cleanup {
 
 function backup_install {
 	to=$2
-	if [ -z $2 ]; then 
+	if [ -z $2 ]; then
 		to=~/.$1
 	fi
 	backup $to
@@ -26,13 +26,18 @@ function backup_install {
 
 function cleanup_install {
 	to=$2
-	if [ -z $2 ]; then 
+	if [ -z $2 ]; then
 		to=~/.$1
 	fi
 	cleanup $to
 	link $1 $to
 }
 
+
+#Set up terminator as default terminal
+if [ -e /usr/bin/terminator ]; then
+	ln -s /usr/bin/terminator gnome-terminal
+fi
 
 mkdir -p ~/homenv_backup
 file=bashrc
