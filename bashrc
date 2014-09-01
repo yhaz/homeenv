@@ -174,3 +174,7 @@ alias sshubuntu14='ssh azhou@ubuntu1404'
 #office test machines
 alias wk1="ssh -X azhou@10.33.75.34"
 alias wk2="ssh -X azhou@10.33.75.35"
+
+#DPDK
+export RTE_SDK=~/projs/dpdk
+export RTE_TARGET=x86_64-default-linuxapp-gcc
