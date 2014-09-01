@@ -158,7 +158,7 @@ alias sshmv='ssh azhou@azhou-mv.ssh22.net'
 #### C development
 #editors 
 alias vi='vim'
-alias gv='gvim 2>/dev/null'
+alias gv='gvim'
 #cscope 
 alias cs='cscope -R *.[ch]'
 
@@ -174,6 +174,25 @@ alias sshubuntu14='ssh azhou@ubuntu1404'
 #office test machines
 alias wk1="ssh -X azhou@10.33.75.34"
 alias wk2="ssh -X azhou@10.33.75.35"
+
+
+alias s214="ssh -X azhou@server214.nicira.eng.vmware.com"
+#Group 1
+alias s109="ssh -X azhou@prmh-nsx-perf-server109.eng.vmware.com"
+alias s110="ssh -X azhou@prmh-nsx-perf-server110.eng.vmware.com"
+
+#Group 2
+alias s111="ssh -X azhou@prmh-nsx-perf-server111.eng.vmware.com"
+alias s112="ssh -X azhou@prmh-nsx-perf-server112.eng.vmware.com"
+alias s113="ssh -X azhou@prmh-nsx-perf-server113.eng.vmware.com"
+alias r111="ssh -X root@prmh-nsx-perf-server111.eng.vmware.com"
+alias r112="ssh -X root@prmh-nsx-perf-server112.eng.vmware.com"
+alias r113="ssh -X root@prmh-nsx-perf-server113.eng.vmware.com"
+
+#kernel make
+alias km="make -j32 >/dev/null"
+#kernel install
+alias ki="sudo make install; sudo make modules_install; sudo reboot"
 
 #DPDK
 export RTE_SDK=~/projs/dpdk
