@@ -215,5 +215,11 @@ alias r111="ssh -X root@prmh-nsx-perf-server111.eng.vmware.com"
 alias r112="ssh -X root@prmh-nsx-perf-server112.eng.vmware.com"
 alias r113="ssh -X root@prmh-nsx-perf-server113.eng.vmware.com"
 
-#Geneve
-alias mg="make drivers/net/geneve.o"
+#kernel make
+alias km="make -j32 >/dev/null"
+#kernel install
+alias ki="sudo make install; sudo make modules_install; sudo reboot"
+
+#DPDK
+export RTE_SDK=~/projs/dpdk
+export RTE_TARGET=x86_64-default-linuxapp-gcc

@@ -1,0 +1,21 @@
+#
+#from http://vincent.bernat.im/en/blog/2011-uml-network-lab.html#uml-configuration
+#
+
+linux init=/bin/sh rootfstype=hostfs
+[...]
+mount -n -t proc proc /proc
+mount -n -t sysfs sysfs /sys
+mount -o bind /usr/lib/uml/modules /lib/modules
+mount -n -t tmpfs tmpfs /tmp -o rw,nosuid,nodev
+mkdir /tmp/ro /tmp/rw /tmp/aufs
+mount -n -t hostfs hostfs /tmp/ro -o /,ro
+mount -n -t aufs aufs /tmp/aufs -o noatime,dirs=/tmp/rw:/tmp/ro=ro
+exec chroot /tmp/aufs /bin/bash
+
+or
+
+mount -n -t hostfs hostfs /tmp/rw -o /home/bernat/mylab/root,rw
+# mount -n -t hostfs hostfs /tmp/ro -o /,ro
+# # mount -n -t aufs aufs /tmp/aufs -o noatime,dirs=/tmp/rw:/tmp/ro=ro
+# # exec chroot /tmp/aufs /bin/bash
