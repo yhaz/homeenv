@@ -1,0 +1,19 @@
+Performance test scripts:
+========================
+ Fetch URL:
+ git://pull.nicira.eng.vmware.com/pktgenperf
+
+Documents:
+==========
+https://sites.google.com/a/vmware.com/performance/documentation/how-to
+
+PXE server:
+===========
+http://pxeserver.nicira.eng.vmware.com/
+
+perfcnct:
+=========
+perfcnct //server208/eth9 //server210/eth6
+to learn more
+perfcncnt --help
+

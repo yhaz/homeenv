@@ -223,3 +223,9 @@ alias ki="sudo make install; sudo make modules_install; sudo reboot"
 #DPDK
 export RTE_SDK=~/projs/dpdk
 export RTE_TARGET=x86_64-default-linuxapp-gcc
+
+#UML
+export UML_LINUX=/home/azhou/projs/uml/kernel/linux-3.13.0/linux
+export UML_SETUP=/home/azhou/projs/homeenv/uml/setup.sh
+alias startuml='$UML_LINUX init=/bin/bash rootfstype=hostfs mem=512M'
+
