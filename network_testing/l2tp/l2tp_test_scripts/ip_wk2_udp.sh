@@ -35,16 +35,43 @@ stop_ip()
 	stop_link
 }
 
+insmod()
+{
+	modprobe l2tp_debugfs
+	modprobe l2tp_eth
+	modprobe l2tp_ip
 
-modprobe l2tp_eth
-modprobe l2tp_ip
+	mkdir -p /debug
+	mount -t debugfs debugfs /debug
+	cat /debug/l2tp/tunnels
+}
+
+rmmod()
+{
+	rmmod l2tp_debugfs
+	rmmod l2tp_eth
+	rmmod l2tp_ip
+	rmmod l2tp_netlink
+	rmmod l2tp_core
+}
+
 
 case $1 in 
+	--insmod)
+		insmod
+	shift
+	;;
+	--rmmod)
+		rmmod
+	shift
+	;;
 	--start-udp)
+		insmod
 		start_udp
 	shift
 	;;
 	--start-ip)
+		insmod
 		start_ip
 	shift
 	;;
