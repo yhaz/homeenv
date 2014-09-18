@@ -40,6 +40,7 @@ if [ -e /usr/bin/terminator ]; then
 fi
 
 mkdir -p ~/homenv_backup
+mkdir -p ~/.ssh
 file=bashrc
 backup_install $file
 file=vimrc
@@ -48,6 +49,8 @@ file=pwclientrc
 backup_install $file
 file=gitconfig
 backup_install $file
+file=sshconfig
+backup_install $file ~/.ssh/config
 file=git-completion.bash
 cleanup_install $file ~/$file
 dir=bin

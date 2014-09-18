@@ -65,6 +65,7 @@ def conf():
                  "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
                  "--with-linux=/lib/modules/%s/build" % uname(),
                  "--with-dbdir=" + ROOT]
+
     if options.werror:
         configure.append("--enable-Werror")
 

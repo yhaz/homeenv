@@ -34,13 +34,14 @@
   	whitespace = trailing-space,space-before-tab
 
 [difftool]
-tool = meld
-prompt = false
+	tool = meld
+	prompt = false
 
 [color]
         ui = auto
         interactive = auto
-        diff = auto
+	diff = auto
+
 
 
 #[alias]

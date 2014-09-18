@@ -166,19 +166,46 @@ alias cs='cscope -R *.[ch]'
 alias gitovs='git clone git@github.com:openvswitch/ovs'
 alias rmpatch='rm -rf 000*'
 alias git-log-2014='git log --since="2014-1-1" |git shortlog -s -n'
-alias gitformatpatch='git format-patch --color=never'
+alias gitpatch='git format-patch --color=never'
 
 #GR home
 alias vncubuntu14='xvncviewer 127.0.0.1:5902'
 alias sshubuntu14='ssh azhou@ubuntu1404'
 
+copy_to_server()
+{
+    copy_to=$1
+    shift
+    for i in $*
+    do
+        scp $i $copy_to
+    done
+}
+
+copy_from_server()
+{
+    copy_from=$1
+    shift
+    for i in $*
+    do
+        scp $copy_from:$i /tmp
+    done
+}
+
 #office test machines
 alias wk1="ssh -X azhou@10.33.75.34"
 alias wk2="ssh -X azhou@10.33.75.35"
+alias stwk1="copy_to_server azhou@10.33.75.34:/tmp"
+alias stwk2="copy_to_server azhou@10.33.75.35:/tmp"
+
 alias s214="ssh -X azhou@server214.nicira.eng.vmware.com"
 #Group 1
 alias s109="ssh -X azhou@prmh-nsx-perf-server109.eng.vmware.com"
 alias s110="ssh -X azhou@prmh-nsx-perf-server110.eng.vmware.com"
+alias ct109="copy_to_server azhou@prmh-nsx-perf-server109.eng.vmware.com:/tmp/"
+alias ct110="copy_to_server azhou@prmh-nsx-perf-server110.eng.vmware.com:/tmp/"
+alias cf109="copy_from_server azhou@prmh-nsx-perf-server109.eng.vmware.com"
+alias cf110="copy_from_server azhou@prmh-nsx-perf-server110.eng.vmware.com"
 
 #Group 2
 alias s111="ssh -X azhou@prmh-nsx-perf-server111.eng.vmware.com"
@@ -193,3 +220,6 @@ alias km="make -j32 >/dev/null"
 #kernel install
 alias ki="sudo make install; sudo make modules_install; sudo reboot"
 
+#DPDK
+export RTE_SDK=~/projs/dpdk
+export RTE_TARGET=x86_64-default-linuxapp-gcc

@@ -14,7 +14,7 @@ function ovs_add_bond_tcp
    ports=$@
 
    $ECHO ovs-vsctl add-bond $bridge $bond $ports bond_mode=balance-tcp lacp=active \
-	other-config:lacp-time=fast  other-config:bond-rebalance-interval=30000
+	other-config:lacp-time=fast  other-config:bond-rebalance-interval=10000
 }
 
 function ovs_add_bond_ab
