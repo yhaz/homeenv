@@ -37,20 +37,14 @@
 mkdir -p /tmp/pnetperf
 rm -rf /tmp/pnetperf/*
 
-RUNS=`seq 1 200`
+RUNS=`seq 1 6000`
 for i in $RUNS 
 do
-	netperf -H 9.1.1.1 -P 0 -v 0 >/tmp/pnetperf/$i & 
+	netperf -H 9.1.1.1 -s 2 -P 0 -v 0 >>/tmp/pnetperf/numbers & 
 done
-sleep 11
+sleep 14
 
-SUM="0.0"
-for i in $RUNS
-do
-	n=`cat /tmp/pnetperf/$i`
-	SUM=$(echo "$SUM + $n" | bc)
-done
-echo $SUM
+awk '{ sum += $1} END {print sum}' /tmp/pnetperf/numbers
 
 
 
