@@ -37,11 +37,14 @@
 mkdir -p /tmp/pnetperf
 rm -rf /tmp/pnetperf/*
 
-RUNS=`seq 1 6000`
+RUNS=`seq 1 400`
 for i in $RUNS 
 do
-	netperf -H 9.1.1.1 -s 2 -P 0 -v 0 >>/tmp/pnetperf/numbers & 
+	netperf -H 9.1.1.1 -t TCP_CRR -s 2 -P 0 -v 0 -l 13 >>/tmp/pnetperf/numbers & 
 done
+sleep 1
+nmap -sn 11.1.1.1/19 -min-rate 400 --max-rate 400 &
+nmap -sn 12.1.1.1/19 -min-rate 400 --max-rate 400 &
 sleep 14
 
 awk '{ sum += $1} END {print sum}' /tmp/pnetperf/numbers
