@@ -1,0 +1,3 @@
+nicira@192-168-100-38:~$ perfcnct //prmh-nsx-perf-server125/p2p1 //prmh-nsx-perf-server126/p2p1
+nicira@192-168-100-38:~$ perfcnct //prmh-nsx-perf-server126/p2p2 //prmh-nsx-perf-server127/p2p2
+
