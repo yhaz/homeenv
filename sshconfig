@@ -3,9 +3,8 @@ Host *
 
 Host performance
 Hostname performance.nicira.eng.vmware.com
-User azhou
+User nicira
 
-Host performance
 Hostname performance-runner2.nicira.eng.vmware.com
 User azhou
 
