@@ -1,10 +1,11 @@
 Host *
-	ForwardX11 Yes
+	forwardX11 yes
 
 Host performance
 Hostname performance.nicira.eng.vmware.com
 User nicira
 
+Host perf2
 Hostname performance-runner2.nicira.eng.vmware.com
 User azhou
 
