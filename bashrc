@@ -197,6 +197,7 @@ alias wk1="ssh -X azhou@10.33.74.223"
 alias wk2="ssh -X azhou@10.33.75.35"
 alias stwk1="copy_to_server azhou@10.33.75.34:/tmp"
 alias stwk2="copy_to_server azhou@10.33.75.35:/tmp"
+alias cfwk2="copy_from_server azhou@10.33.75.35"
 
 alias s214="ssh -X azhou@server214.nicira.eng.vmware.com"
 #Group 1
