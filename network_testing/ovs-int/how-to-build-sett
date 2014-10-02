@@ -1,0 +1,57 @@
+
+How to build ovs-int
+
+Install ovs-int test dependencies
+e.g.:
+
+apt-get install python-pytest python-testtools python-nose python-mock python-eventlet python-httplib2 python-webob
+
+Get all of the trees. Here's one way:
+
+git clone git://openvswitch.org/openvswitch
+git clone git://pull.nicira.eng.vmware.com/ovs-int
+git clone git://pull.nicira.eng.vmware.com/stt
+
+Change directory into openvswitcH:
+
+cd openvswitch
+
+Apply the stt patches to the openvswitch tree. You can use Git or quilt for this:
+Use "git quiltimport". This will import each of the stt patches as a Git commit. This is more convenient if you already like working with Git:
+
+git quiltimport --patches ../stt
+
+Use "quilt" to apply each of the patches in turn. This is a good way if you already like working with quilt. It has the downside that "git diff" and "git status" will show huge changes in your openvswitch directory:
+
+QUILT_PATCHES=../stt quilt push -a
+
+Bootstrap, configure, and build Open vSwitch. I tend to do my builds in a subdirectory, so that's what my instructions show, but you don't have to:
+
+./boot.sh
+mkdir _build
+cd _build
+../configure --prefix=/usr --localstatedir=/var --enable-Werror
+make -j8
+
+Install Open vSwitch. I always install it locally to the build directory, to avoid screwing up my real system and to avoid needing to be root:
+
+make install DESTDIR=$PWD/inst
+
+Bootstrap, configure, and build ovs-int:
+
+cd ../../ovs-int
+./boot.sh
+mkdir _build
+cd _build
+../configure --with-ovs=../../openvswitch --with-ovs-build=../../openvswitch/_build
+make -j8
+
+Run ovs-int tests. This requires being root (this is a bug). It also requires the OVS tools to be in $PATH and that OVS be able to access its installed data. I wrote a script that does this:
+
+sudo make \
+	     PATH=$PATH:$PWD/../../openvswitch/_build/inst/usr/bin:$PWD/../../openvswitch/_build/inst/usr/sbin \
+	     OVS_PKGDATADIR=$PWD/../../openvswitch/_build/inst/usr/share/openvswitch \
+	     OVS_RUNDIR=$PWD/../../openvswitch/_build/inst/var/run/openvswitch \
+	     "${@-check}" 
+
+
