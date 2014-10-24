@@ -129,10 +129,10 @@ commands.append(kill)
 
 def reset():
     kill()
-    if os.path.exists(ROOT):
-        shutil.rmtree(ROOT)
-    for dp in _sh("ovs-dpctl dump-dps", capture=True):
-        _sh("ovs-dpctl", "del-dp", dp.strip())
+   # if os.path.exists(ROOT):
+   #     shutil.rmtree(ROOT)
+   # for dp in _sh("ovs-dpctl dump-dps", capture=True):
+   #     _sh("ovs-dpctl", "del-dp", dp.strip())
 commands.append(reset)
 
 
