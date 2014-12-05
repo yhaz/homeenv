@@ -167,6 +167,7 @@ alias gitovs='git clone git@github.com:openvswitch/ovs'
 alias rmpatch='rm -rf 000*'
 alias git-log-2014='git log --since="2014-1-1" |git shortlog -s -n'
 alias gitpatch='git format-patch --color=never'
+alias gitnetnext='git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/davem/net-next'
 
 #GR home
 alias vncubuntu14='xvncviewer 127.0.0.1:5902'
