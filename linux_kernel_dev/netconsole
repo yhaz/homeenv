@@ -1,0 +1,10 @@
+local machine
+===============
+$ sudo sh -c 'echo netconsole >> /etc/modules'
+$ sudo sh -c 'echo options netconsole netconsole=6666@192.168.1.102/eth0,6666@192.168.1.103/08:00:46:d4:1d:82 > /etc/modprobe.d/netconsole.conf'
+
+dmesg -n 7
+
+remote machine
+===============
+netcat -l -u 192.168.1.103 6666 | tee ~/netconsole.log

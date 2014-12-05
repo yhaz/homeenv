@@ -24,9 +24,9 @@
 	#suppresscc = self 
 	chainreplyto = false
 	from = Andy Zhou <azhou@nicira.com>
-#	to = dev@openvswitch.com
-	to = davem@davemloft.net
-	cc = netdev@vger.kernel.org
+	to = dev@openvswitch.com
+#	to = davem@davemloft.net
+#	cc = netdev@vger.kernel.org
 	smtpserver = smtp.gmail.com
 	smtpuser = azhou@nicira.com
 	smtpssl

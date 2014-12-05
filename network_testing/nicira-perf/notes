@@ -17,3 +17,9 @@ perfcnct //server208/eth9 //server210/eth6
 to learn more
 perfcncnt --help
 
+
+Spirent
+========
+console: prmh-nsx-perf-stc.eng.vmware.com
+interfaces: nsx-perf-stc-chasiss\6\5 (6\6)
+

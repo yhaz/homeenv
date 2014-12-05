@@ -1,0 +1,129 @@
+(Version 3)
+2->3 Redo the PPS measurement with proper irq affinity and NIC RSS settings.NIC
+
+
+Classifier experiment:
+=====================
+1. Set up
+
+Machine set ups are:  perf125 -> perf128 -> perf127
+
+Perf125 hosts 3 IP addresses:  9.1.1.2, 11.1.1.2 and 12.1.1.2
+perf127 hosts 3 IP addresses:  9.1.1.1, 11.1.1.1 and 12.1.1.1
+perf128 run OVS under test.
+
+The open flow rules are set up as the following:
+
+"priority= 400, arp, action=normal"
+"priority= 300, ip, ip_dst=11.1.1.1/16, action=drop"
+"priority= 200, tcp, ip_dst=9.1.1.1, tcp_src=10, tcp_dst=10, action=drop"
+"priority= 100, ip, ip_dst=9.1.1.1/255.255.255.0 , action=normal"
+
+With the intention that 9.1.1.2 -> 9.1.1.1 netperf connections are allowed
+Any traffic destined to 11.1/16 or 12.1/16 will be dropped
+
+
+Traffic pattern: 
+
+Traffic are: 
+400 concurrent netperf TCP_CRR sessions (running for 10 seconds)
+4000 nmap scans/s to 11.1.1.1/17.  (all should be dropped)
+4000 nmap scans/s to 12.1.1.1/17.  (all should be dropped)
+
+Note 1: nmap generate 4 probes per host, 2 http syn probe and 2 https syn probes
+	So nmap will scan 1000 hosts per second for each nmap session.
+
+Note 2: All netperf and namp scans run concurrently.
+Note 3: datapath exact match is always on for this experiment.
+Note 4: Data collected with master branch OVS.
+
+Measurements data collected:
+TCP_CRR: total connection reported by netperf  average over multiple runs.
+MAX DP flows:  obtained by sampling ovs-dpctl output, may be less than actual max.
+Average number of masks:  Most common output of ovs-dpctl output during test.
+User cpu time:    Top output of  user space % time.
+System cpu time:  100% - User cpu time - Top reported idle time.
+
+1. All optimization on
+-------------------
+TCP_CRR: 117K 
+MAX dp flows: 15 
+number of masks: 14
+User CPU time: 0.1%
+System CPU time: 20%
+
+2. All optimization off
+-------------------
+TCP_CRR: 56K 
+MAX dp flows: 905758 
+number of masks: 3
+User CPU time: 37%
+System CPU time: 40%
+
+3. All off, except priority sorting
+-------------------
+TCP_CRR: 57K 
+MAX dp flows: 794124 
+number of masks: 4
+User CPU time: 39%
+System CPU time: 45%
+
+4. All off, except partitioning
+-------------------
+TCP_CRR: 55K 
+MAX dp flows: 905758 (same as all opt off) 
+number of masks: 4
+User CPU time: 39%
+System CPU time: 45%
+
+5. All off, except staged lookup
+-------------------
+TCP_CRR: 115K 
+MAX dp flows: 14 
+number of masks: 13
+User CPU time: 0.1%
+System CPU time: 15%
+
+6. All off, except prefix tracking
+-------------------
+TCP_CRR: 95K 
+MAX dp flows: 13 
+number of masks: 10
+User CPU time: 0.1%
+System CPU time: 15%
+
+7. Disable megaflow 
+-------------------
+TCP_CRR: 37K 
+MAX dp flows: 1051884 
+number of masks: 0
+User CPU time: 45%
+System CPU time: 40%
+
+Datapath exact match experiment
+==============================
+Megaflow with all Classifier optimization:
+
+                     TCP_CRR                 avg mask/pkt        usr/sys
+
+w/ exact cache         120K                     1.68            0.1%/20%
+w/o exact cache         92k                     3.21            0.1%/18%
+
+
+Megaflow with no Classifier optimization:
+
+                       TCP_CRR               avg mask/pkt       usr/sys 
+w/ exact cache         56K                     1.92             38%/40%
+w/o exact cache        56K                     2.45             40%/42%
+
+
+Base line PPS over number of masks (with 16 CORE 2Ghz CPU, ubuntu 14.04, INTEL 10G NIC )
+=======================================================================================
+
+Number of masks     1         5         10       15        20       25      30
+exact cache         10.741    10.625    10.477   10.725    10.730   10.699  10.696 
+w/o exact cache     10.735    9.137     6.923    6.629     5.831    5.166   4.50
+
+
+
+
