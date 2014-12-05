@@ -61,10 +61,9 @@ def conf():
                  "--with-linux=/lib/modules/%s/build" % uname(),
                  "--with-dbdir=" + ROOT]
 
-    configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
-                 "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
-                 "--with-linux=/lib/modules/%s/build" % uname(),
-                 "--with-dbdir=" + ROOT]
+#    configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
+#                 "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
+#                 "--with-dbdir=" + ROOT]
 
     if options.werror:
         configure.append("--enable-Werror")
@@ -155,7 +154,9 @@ def run():
         _sh("ovsdb-tool", "create", ROOT + "/conf.db",
             OVS_SRC + "/vswitchd/vswitch.ovsschema")
 
-    opts = ["--pidfile", "--log-file", "--enable-dummy"]
+    opts = ["--pidfile", "--log-file"]
+
+    _sh("dmesg -n 7")
 
     _sh(*(["ovsdb-server",
            "--remote=punix:%s/run/db.sock" % ROOT,
