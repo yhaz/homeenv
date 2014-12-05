@@ -220,7 +220,8 @@ alias r113="ssh -X root@prmh-nsx-perf-server113.eng.vmware.com"
 #kernel make
 alias km="make -j32 >/dev/null"
 #kernel install
-alias ki="sudo make install; sudo make modules_install; sudo reboot"
+alias ki="sudo make modules_install; sudo make install; sudo reboot"
+alias mi="sudo make modules_install"
 
 #DPDK
 #export RTE_SDK=~/projs/dpdk
