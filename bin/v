@@ -59,6 +59,20 @@ def conf():
     configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
                  "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
                  "--with-linux=/lib/modules/%s/build" % uname(),
+                 "--with-dbdir=" + ROOT,
+                 "--enable-Werror" ]
+
+    if options.werror:
+        configure.append("--enable-Werror")
+
+    if options.cache_time:
+        configure.append("--enable-cache-time")
+
+    if options.mandir:
+        configure.append("--mandir=" + options.mandir)
+
+    _sh("./boot.sh")
+    _sh(*configure)
 commands.append(conf)
 
 
@@ -138,11 +152,6 @@ def run():
             OVS_SRC + "/vswitchd/vswitch.ovsschema")
 
     opts = ["--pidfile", "--log-file"]
-<<<<<<< HEAD
-
-    _sh("dmesg -n 7")
-=======
->>>>>>> 1174da141c418ef0963231dd00f99216e3d723bb
 
     _sh(*(["ovsdb-server",
            "--remote=punix:%s/run/db.sock" % ROOT,
