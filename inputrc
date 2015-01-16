@@ -1,0 +1,9 @@
+# CTRL-P and CTRL-N has the old 'up' and 'down' behavior
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+
+# Reconfigure 'Left' and 'right' as before
+"\e[C": forward-char
+"\e[D": backward-char
+

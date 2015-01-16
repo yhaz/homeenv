@@ -12,9 +12,18 @@ HISTCONTROL=ignoredups:ignorespace
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+#Whenever displaying the prompt, write the previous line to disk
+PROMPT_COMMAND='history -a'
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+
+#ignore small typos of directory names
+shopt -s cdspell
+
+# Hit Ctrl-D twice to quit bash
+export IGNOREEOF=1
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -235,3 +244,4 @@ alias startuml='$UML_LINUX init=/bin/bash rootfstype=hostfs'
 
 export RTE_SDK=/home/azhou/projs/pktgen-DPDK/dpdk
 export RTE_TARGET=x86_64-pktgen-linuxapp-gcc
+
