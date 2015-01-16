@@ -196,9 +196,9 @@ copy_from_server()
 #office test machines
 alias wk1="ssh -X azhou@10.33.74.223"
 alias wk2="ssh -X azhou@10.33.75.35"
-alias stwk1="copy_to_server azhou@10.33.75.34:/tmp"
+alias stwk1="copy_to_server azhou@10.33.74.223:/tmp"
 alias stwk2="copy_to_server azhou@10.33.75.35:/tmp"
-alias cfwk2="copy_from_server azhou@10.33.75.35"
+alias cfwk1="copy_from_server azhou@10.33.74.223"
 
 alias s214="ssh -X azhou@server214.nicira.eng.vmware.com"
 #Group 1
@@ -210,6 +210,7 @@ alias cf109="copy_from_server azhou@prmh-nsx-perf-server109.eng.vmware.com"
 alias cf110="copy_from_server azhou@prmh-nsx-perf-server110.eng.vmware.com"
 
 #Group 2
+#drac interfaces: prmh-nsx-perf-server<n>-ild.eng.vmware.com
 alias s111="ssh -X azhou@prmh-nsx-perf-server111.eng.vmware.com"
 alias s112="ssh -X azhou@prmh-nsx-perf-server112.eng.vmware.com"
 alias s113="ssh -X azhou@prmh-nsx-perf-server113.eng.vmware.com"
