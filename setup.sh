@@ -43,6 +43,8 @@ mkdir -p ~/homenv_backup
 mkdir -p ~/.ssh
 file=bashrc
 backup_install $file
+file=tmux.conf
+backup_install $file
 file=inputrc
 backup_install $file
 file=vimrc
