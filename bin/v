@@ -60,17 +60,16 @@ def conf():
                  "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
                  "--with-linux=/lib/modules/%s/build" % uname(),
                  "--with-dbdir=" + ROOT,
-                 "--enable-Werror" ,
-                 "--with-llc=/home/azhou/projs/bpf/bpf/tools/bpf/llvm/bld/Debug+Asserts/bin/llc"
+                 "--enable-Werror" 
                  ]
 
-    configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
-                 "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
-                 "--with-linux=/lib/modules/%s/build" % uname(),
-                 "--with-dbdir=" + ROOT,
-                 "--enable-Werror" ,
-                 "--with-llc=/home/azhou/projs/bpf/bpf/tools/bpf/llvm/bld/Debug+Asserts/bin/llc"
-                 ]
+#    configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
+#                 "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
+#                 "--with-linux=/lib/modules/%s/build" % uname(),
+#                 "--with-dbdir=" + ROOT,
+#                 "--enable-Werror" ,
+#                 "--with-llc=/home/azhou/projs/bpf/bpf/tools/bpf/llvm/bld/Debug+Asserts/bin/llc"
+#                 ]
 
     if options.werror:
         configure.append("--enable-Werror")
@@ -161,9 +160,9 @@ def run():
     if not os.path.exists(bpf_dir):
         os.makedirs(bpf_dir)
 
-    os.chdir(bpf_dir)
-    _sh("cp ../../bpf/*.bpf .")
-    os.chdir(OVS_SRC)
+#    os.chdir(bpf_dir)
+#    _sh("cp ../../bpf/*.bpf .")
+#    os.chdir(OVS_SRC)
 
     if not os.path.exists(ROOT + "/conf.db"):
        _sh("ovsdb-tool", "create", ROOT + "/conf.db",
