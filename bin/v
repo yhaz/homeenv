@@ -63,25 +63,13 @@ def conf():
                  "--enable-Werror" 
                  ]
 
-#    configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
-#                 "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
-#                 "--with-linux=/lib/modules/%s/build" % uname(),
-#                 "--with-dbdir=" + ROOT,
-#                 "--enable-Werror" ,
+    configure = ["./configure", "--prefix=" + ROOT, "--localstatedir=" + ROOT,
+                 "--with-logdir=%s/log" % ROOT, "--with-rundir=%s/run" % ROOT,
+                 "--with-linux=/lib/modules/%s/build" % uname(),
+                 "--with-dbdir=" + ROOT,
+                 "--enable-Werror" ,
 #                 "--with-llc=/home/azhou/projs/bpf/bpf/tools/bpf/llvm/bld/Debug+Asserts/bin/llc"
-#                 ]
-
-    if options.werror:
-        configure.append("--enable-Werror")
-
-    if options.cache_time:
-        configure.append("--enable-cache-time")
-
-    if options.mandir:
-        configure.append("--mandir=" + options.mandir)
-
-    _sh("./boot.sh")
-    _sh(*configure)
+                 ]
 commands.append(conf)
 
 
@@ -156,9 +144,9 @@ def run():
         _sh("ovs-pki req+sign ovsclient")
         os.chdir(OVS_SRC)
 
-    bpf_dir = ROOT + "/share/openvswitch"
-    if not os.path.exists(bpf_dir):
-        os.makedirs(bpf_dir)
+#    bpf_dir = ROOT + "/share/openvswitch"
+#    if not os.path.exists(bpf_dir):
+#        os.makedirs(bpf_dir)
 
 #    os.chdir(bpf_dir)
 #    _sh("cp ../../bpf/*.bpf .")
