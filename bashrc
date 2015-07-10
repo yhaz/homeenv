@@ -205,9 +205,9 @@ copy_from_server()
 
 #office test machines
 alias wk1="ssh -X azhou@10.33.74.223"
-alias wk2="ssh -X azhou@10.33.75.35"
+alias wk2="ssh -X azhou@10.33.74.34"
 alias stwk1="copy_to_server azhou@10.33.74.223:/tmp"
-alias stwk2="copy_to_server azhou@10.33.75.35:/tmp"
+alias stwk2="copy_to_server azhou@10.33.74.34:/tmp"
 alias cfwk1="copy_from_server azhou@10.33.74.223"
 
 alias s214="ssh -X azhou@server214.nicira.eng.vmware.com"
@@ -238,11 +238,5 @@ alias mi="sudo make modules_install"
 #export RTE_SDK=~/projs/dpdk
 #export RTE_TARGET=x86_64-default-linuxapp-gcc
 
-#UML
-export UML_LINUX=/home/azhou/projs/uml/kernel/linux-3.13.0/linux
-export UML_SETUP=/home/azhou/projs/homeenv/uml/setup.sh
-alias startuml='$UML_LINUX init=/bin/bash rootfstype=hostfs'
 
-export RTE_SDK=/home/azhou/projs/pktgen-DPDK/dpdk
-export RTE_TARGET=x86_64-pktgen-linuxapp-gcc
 

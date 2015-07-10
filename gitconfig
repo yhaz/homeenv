@@ -10,7 +10,8 @@
 	br = branch
 	ci = commit
 	st = status
-	rb = 'rebase -i origin/master'
+	rbm = 'rebase -i origin/master'
+	rbc = 'rebase --continue'
 	unstage = 'reset HEAD --'
 	last = 'log -l HEAD'
 	visual = '!gitk'

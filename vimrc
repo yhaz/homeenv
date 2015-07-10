@@ -27,7 +27,7 @@ let $BASH_ENV = "~/.bash_profile"
 set shell=/bin/bash
 
 filetype off
-call pathogen#infect()
+"call pathogen#infect()
 filetype plugin indent on
 set nocompatible
 
@@ -202,15 +202,15 @@ endif
 
 syntax on
 set background=dark
-let g:badwolf_tabline = 2
-let g:badwolf_html_link_underline = 0
-colorscheme badwolf
+"let g:badwolf_tabline = 2
+"let g:badwolf_html_link_underline = 0
+"colorscheme badwolf
 
 " Reload the colorscheme whenever we write the file.
-augroup color_badwolf_dev
-    au!
-    au BufWritePost badwolf.vim color badwolf
-augroup END
+"augroup color_badwolf_dev
+"    au!
+"    au BufWritePost badwolf.vim color badwolf
+"augroup END
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
