@@ -1,6 +1,6 @@
 I=$1
 OUTPUT_DIR=/tmp/mon-output
-P=ovsdb-client 
+P=ovsdb-client
 #DB=unix:/home/azhou/projs/ovs/tutorial/sandbox/db.sock
 rm -rf $OUTPUT_DIR
 mkdir -p $OUTPUT_DIR
