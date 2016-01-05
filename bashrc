@@ -148,6 +148,7 @@ alias t='~/bin/haproxy_cmdline.sh'
 #alias
 alias a='alias'
 alias va='vi ~/.bashrc'
+alias g='git'
 
 # APT 
 DEV_PKG_FILE=~/projs/homeenv/ubuntu/packages/devel
