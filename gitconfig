@@ -19,18 +19,18 @@
 
 [user]
 	name="Andy Zhou"
-	email="azhou@nicira.com"
+	email="azhou@ovn.org"
 	
 [sendemail]
 	#suppresscc = self 
 	chainreplyto = false
-	from = Andy Zhou <azhou@nicira.com>
+	from = Andy Zhou <azhou@ovn.org>
 	to = dev@openvswitch.com
 #	to = joestringer@nicira.com
 #	to = davem@davemloft.net
 #	cc = netdev@vger.kernel.org
 	smtpserver = smtp.gmail.com
-	smtpuser = azhou@nicira.com
+	smtpuser = azhou.ovn@gmail.com
 	smtpssl
 
 [core]
