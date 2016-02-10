@@ -240,8 +240,8 @@ alias ki="sudo make modules_install; sudo make install; sudo reboot"
 alias mi="sudo make modules_install"
 
 #DPDK
-#export RTE_SDK=~/projs/dpdk
-#export RTE_TARGET=x86_64-default-linuxapp-gcc
+export RTE_SDK=~/projs/dpdk
+export RTE_TARGET=x86_64-native-linuxapp-gcc
 
 
 
