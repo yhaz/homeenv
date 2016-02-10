@@ -230,6 +230,9 @@ alias r111="ssh -X root@prmh-nsx-perf-server111.eng.vmware.com"
 alias r112="ssh -X root@prmh-nsx-perf-server112.eng.vmware.com"
 alias r113="ssh -X root@prmh-nsx-perf-server113.eng.vmware.com"
 
+alias s121='ssh -X azhou@prmh-nsx-perf-server121.eng.vmware.com'
+alias s126='ssh -X azhou@prmh-nsx-perf-server126.eng.vmware.com'
+
 #kernel make
 alias km="make -j32 >/dev/null"
 #kernel install

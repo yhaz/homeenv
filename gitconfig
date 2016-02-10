@@ -26,6 +26,7 @@
 	chainreplyto = false
 	from = Andy Zhou <azhou@ovn.org>
 	to = dev@openvswitch.com
+#	to = diproiettod@vmware.com
 #	to = joestringer@nicira.com
 #	to = davem@davemloft.net
 #	cc = netdev@vger.kernel.org
