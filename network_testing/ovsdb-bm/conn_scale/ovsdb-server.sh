@@ -1,6 +1,4 @@
-IP=127.0.0.1
-PORT=9001
-PROBE=0
+. env.conf
 
 ovs_vsctl_set_column ()
 {
@@ -12,14 +10,14 @@ ovs_vsctl_set_column ()
    if test ! -z "$table" && test ! -z "$sel" \
         && test ! -z "$column" && test ! -z "$value"; then
 
-       ovs-vsctl set $table $sel $column=$value
+       ovs-vsctl set "$table" "$sel" "$column"="$value"
 
    fi 
 }
 
-# ovs-appctl -t ovsdb-server vlog/set ::dbg
+ovs-appctl -t ovsdb-server vlog/set ::dbg
 
 ovs-vsctl set-manager ptcp:$PORT
 ovs-appctl -t ovsdb-server ovsdb-server/add-remote db:Open_vSwitch,Open_vSwitch,manager_options
-ovs_vsctl_set_column Manager ptcp:$PORT inactivity_probe $PROBE
+ovs_vsctl_set_column Manager ptcp:$PORT inactivity_probe "$PROBE"
 ovs-vsctl list Manager
