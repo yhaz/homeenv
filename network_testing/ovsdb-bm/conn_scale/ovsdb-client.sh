@@ -24,8 +24,9 @@ rm -rf $OUTPUT_DIR $PID_DIR
 mkdir -p $OUTPUT_DIR $PID_DIR
 
 for i in `seq 1 $CONN_SCALE`; do
-     ovsdb-client --detach --pidfile=$PID_DIR/$i $METHOD $COLUMNS >$OUTPUT_DIR/$i 
+     ovsdb-client --detach --pidfile=$PID_DIR/$i $METHOD tcp:$IP:$PORT $COLUMNS >$OUTPUT_DIR/$i 
      if [[ $? != 0 ]]; then
+        cleanup;
         exit 1
      fi
 done
@@ -38,4 +39,5 @@ while true; do
 done
 
 # Just in case
-cleanup
+cleanup;
+exit 0

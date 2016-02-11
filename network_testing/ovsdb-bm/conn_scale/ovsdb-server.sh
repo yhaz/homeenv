@@ -15,7 +15,14 @@ ovs_vsctl_set_column ()
    fi 
 }
 
-ovs-appctl -t ovsdb-server vlog/set ::dbg
+if_dbg ()
+{
+  if test ! -z "$DEBUG"; then
+      $1
+  fi
+}
+
+if_dbg "ovs-appctl -t ovsdb-server vlog/set ::dbg"
 
 ovs-vsctl set-manager ptcp:$PORT
 ovs-appctl -t ovsdb-server ovsdb-server/add-remote db:Open_vSwitch,Open_vSwitch,manager_options
