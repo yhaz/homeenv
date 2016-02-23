@@ -1,1 +1,1 @@
-make check TESTSUITEFLAGS=$1
+make check TESTSUITEFLAGS="$*"
