@@ -1,0 +1,2 @@
+for i in {1..50}; do sudo ip link delete vif-${i} up; done
+for i in {1..50}; do sudo ip link delete vifpeer-${i} up; done
