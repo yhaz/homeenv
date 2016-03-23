@@ -56,3 +56,5 @@
 #	    [remote "review"]
 #	          url = ssh://azhou@review.nicira.com:29418/ovs-int
 #	          fetch = +refs/heads/:refs/remotes/review/
+[push]
+	default = matching
