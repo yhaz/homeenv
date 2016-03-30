@@ -1,0 +1,6 @@
+ovn-nbctl lswitch-add ls0
+
+for i in {1..50}; do ovn-nbctl lport-add ls0 vif-${i}; done
+for i in {1..50}; do sudo ip link add vif-${i} type veth peer name vifpeer-${i}; done
+for i in {1..50}; do sudo ip link set vif-${i} up; done
+for i in {1..50}; do sudo ip link set vifpeer-${i} up; done
