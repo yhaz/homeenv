@@ -14,7 +14,7 @@ CONFIGTOOL=~/bin/config
 
 BUSYBOX_DL_FILE=$(BUSYBOX).tar.bz2
 KERNEL_DL_FILE=$(KERNEL).tar.xz
-KERNEL_bzImage=$(TOP)/$(KERNEL)/$(OBJDIR)/arch/x86_64/boot/bzImage
+KERNEL_bzImage=$(TOP)/$(KERNEL)/$(OBJDIR)/arch/x86/boot/bzImage
 
 $(TOP)/$(BUSYBOX_DL_FILE):
 	( cd $(TOP); \
@@ -24,10 +24,13 @@ $(TOP)/$(BUSYBOX)/$(OBJDIR)/.config: $(TOP)/$(BUSYBOX_DL_FILE)
 	(cd $(TOP); tar xjf $(BUSYBOX_DL_FILE))
 	mkdir -p $(TOP)/$(BUSYBOX)/$(OBJDIR)
 	(cd $(TOP)/$(BUSYBOX); \
-	make O=$(OBJDIR) defconfig \
+	make O=$(OBJDIR) defconfig; \
 	# enable CONFIG_STATIC  \
-	echo config --file $(TOP)/$(BUSYBOX)/$(OBJDIR)/.config -k --enable static \
-	config --file $(TOP)/$(BUSYBOX)/$(OBJDIR)/.config -k --enable static \
+	config --file $(TOP)/$(BUSYBOX)/$(OBJDIR)/.config --enable static; \
+	# disable CONFIG_DESKTOP  \
+	config --file $(TOP)/$(BUSYBOX)/$(OBJDIR)/.config --disable desktop; \
+	# change CONFIG_EXTRA_CFLAGS to "-m32 -march=i386"  \
+	config --file $(TOP)/$(BUSYBOX)/$(OBJDIR)/.config --set-str extra_cflags "-m32 -march=i386"; \
 	make O=$(OBJDIR) oldconfig \
 	)
 
@@ -55,22 +58,24 @@ $(TOP)/$(KERNEL_DL_FILE):
 
 $(KERNEL_bzImage): $(TOP)/$(KERNEL_DL_FILE)
 	(cd $(TOP); tar xJf $(KERNEL_DL_FILE))
-	(cd $(TOP)/$(KERNEL); make O=$(OBJDIR) x86_64_defconfig)
+	(cd $(TOP)/$(KERNEL); make O=$(OBJDIR) defconfig)
 	(cd $(TOP)/$(KERNEL); make O=$(OBJDIR) kvmconfig)
 	(cd $(TOP)/$(KERNEL); make O=$(OBJDIR) -j8)
 
 .PHONY: kernel
 kernel: $(KERNEL_bzImage)
 
-
 .PHONY: all
 all: $(TOP)/initramfs-busybox-x86.cpio.gz $(KERNEL_bzImage)
 
+qemu_debug=-s -S
+#qemu_debug=
+
 .PHONY: run
 run:
-	(cd $(TOP); qemu-system-x86_64 -kernel $(KERNEL_bzImage) \
+	(cd $(TOP); qemu-system-i386 -kernel $(KERNEL_bzImage) \
 		-initrd $(TOP)/initramfs-busybox-x86.cpio.gz \
-		-nographic -append "console=ttyS0 debug" )
+		$(qemu_debug) -nographic -append "console=ttyS0 loglevel=10" )
 
 .PHONY: clean_busybox
 clean_busybox:
