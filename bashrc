@@ -245,4 +245,4 @@ export RTE_TARGET=x86_64-native-linuxapp-gcc
 
 
 #autojump
-. /usr/share/autojump/autojump.bash
+. /usr/share/autojump/autojump.sh
