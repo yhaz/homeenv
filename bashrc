@@ -243,5 +243,9 @@ alias mi="sudo make modules_install"
 export RTE_SDK=~/projs/dpdk
 export RTE_TARGET=x86_64-native-linuxapp-gcc
 
+alias sb='make sandbox "SANDBOXFLAGS=-o"'
 
+export GOROOT=/usr/local/go
+export PATH=$GOROOT/bin:$PATH
+export GOPATH=~/go
 
