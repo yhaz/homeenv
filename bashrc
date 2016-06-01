@@ -245,7 +245,10 @@ export RTE_TARGET=x86_64-native-linuxapp-gcc
 
 alias sb='make sandbox "SANDBOXFLAGS=-o"'
 
+#Go
 export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
 export GOPATH=~/go
 
+#autojump
+. /usr/share/autojump/autojump.bash
