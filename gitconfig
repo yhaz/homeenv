@@ -26,7 +26,7 @@
 	#suppresscc = self 
 	chainreplyto = false
 	from = Andy Zhou <azhou@ovn.org>
-	to = dev@openvswitch.com
+	to = dev@openvswitch.org
 #	to = diproiettod@vmware.com
 #	to = joestringer@nicira.com
 #	to = davem@davemloft.net
@@ -58,3 +58,5 @@
 #	          fetch = +refs/heads/:refs/remotes/review/
 [push]
 	default = matching
+[pack]
+	windowMemory = 700m
