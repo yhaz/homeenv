@@ -4,4 +4,14 @@
  
  Set timeout from 300 to 10.
 
+* A better fix: /etc/network/interface.d/50-cloud-init.cfg
+
+Change 
+
+
+auto lo
+iface lo inet loopback
+
+allow-hotpulg ens3
+iface ens3 inet dhcp
 
