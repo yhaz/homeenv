@@ -1,0 +1,16 @@
+
+#QEMU_CMD=/home/azhou/projs/qemu/x86_64-softmmu/qemu-system-x86_64
+
+QEMU_CMD=qemu-system-x86_64
+
+small_linux_img: ../linux-0.2.img
+	(cd .. ;  \
+	  wget http://wiki.qemu.org/download/linux-0.2.img.bz2 \
+	  bunzip2 linux-0.2.img.bz2 ) \
+
+BASIC=-L pci-bios ../linux-0.2.img -cpu host -enable-kvm
+
+QEMU_OPTIONS=$(BASIC) $(ADDED)
+
+launch:
+	$(QEMU_CMD) $(QEMU_OPTIONS)
