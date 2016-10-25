@@ -1,0 +1,9 @@
+
+QEMU_CMD=qemu-system-x86_64
+
+BASIC=-hda ../disk.img -cdrom ../my-seed.img -cpu host -enable-kvm
+
+QEMU_OPTIONS=$(BASIC) $(ADDED)
+
+launch:
+	$(QEMU_CMD) $(QEMU_OPTIONS)
