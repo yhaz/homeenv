@@ -1,0 +1,7 @@
+* Ubuntu 16.04 dhcp timeout is too long
+
+ -- change /etc/dhcp/dhclient.conf
+ 
+ Set timeout from 300 to 10.
+
+
