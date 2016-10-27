@@ -31,7 +31,7 @@ User azhou
 
 Host coreos
 HostName localhost
-Port 3333
+Port 2222
 User core
 StrictHostKeyChecking no
 UserKnownHostsFile /dev/null
