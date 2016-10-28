@@ -9,6 +9,7 @@ VM_KERNEL=
 VM_INITRD=
 VM_MEMORY='1024'
 VM_CDROM=
+VM_NET=10.0.2.0/24
 VM_PFLASH_RO=
 VM_PFLASH_RW=
 VM_NCPUS="`grep -c ^processor /proc/cpuinfo`"
@@ -24,6 +25,8 @@ Options:
     -a FILE     SSH public keys for login access. [~/.ssh/id_{dsa,rsa}.pub]
     -p PORT     The port on localhost to map to the VM's sshd. [2222]
     -s          Safe settings: single simple cpu and no KVM.
+    -i IMAGE    use IMAGE as the VM image.
+    -n NET      use NET for the first nic
     -h          this ;-)
 
 This script is a wrapper around qemu for starting CoreOS virtual machines.
@@ -70,6 +73,12 @@ while [ $# -ge 1 ]; do
         -h|-help|--help)
             echo "$USAGE"
             exit ;;
+        -i)
+             VM_IMAGE="$2"
+             shift 2 ;;
+        -n)
+             VM_NET="$2"
+             shift 2 ;;
         --)
             shift
             break ;;
@@ -200,7 +209,7 @@ case "${VM_BOARD}" in
             -name "$VM_NAME" \
             -m ${VM_MEMORY} \
             -net nic,vlan=0,model=virtio \
-            -net user,vlan=0,hostfwd=tcp::"${SSH_PORT}"-:22,hostname="${VM_NAME}" \
+            -net user,vlan=0,hostfwd=tcp::"${SSH_PORT}"-:22,hostname="${VM_NAME}",net=${VM_NET} \
             "$@"
         ;;
     arm64-usr)

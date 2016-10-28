@@ -29,10 +29,16 @@ Host perf129
 Hostname prmh-nsx-perf-server129.eng.vmware.com
 User azhou
 
-Host coreos
+Host coreos1
 HostName localhost
 Port 2222
 User core
 StrictHostKeyChecking no
 UserKnownHostsFile /dev/null
+
+Host coreos2
+HostName localhost
+Port 2223
+User core
+StrictHostKeyChecking no
 
