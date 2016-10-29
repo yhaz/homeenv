@@ -1,0 +1,46 @@
+#cloud-config
+
+hostname: coreos3
+ssh_authorized_keys:
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDWjXtf7GVz1RstFSev8IBvmPJZVsNshh9BZAV79tGNwwyfoOGnGyrb8FZKTT9xe9PKcWsyD4UyAkaLs46DxtwiVFqQLl6hhLIYEreST4jaRiDhixB5XddT/BKiLsRzd8lkegsLHGeI8xm4lmp697O9Katsvw9odqZSDUt3kpl19ZzEA4JoiHJLFTjldSWNwZEQ9C5BVMvvVEcA1U00hiEhLVbeCCiiiAI1n3d5dqaOw6cRJHhfvEO9/hojIdIKzDXr7CcGZsFAIJKSbqcRV4sLN1aEd61KJAzor2kYdjwuSuKZi70vavmxNhzeQnWihQe5XLQzTT+HKPmbnVnVvM1F root@ubuntu
+
+coreos:
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: down-interfaces.service
+      command: start
+      content: |
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/ip link set ens4 down
+        ExecStart=/usr/bin/ip addr flush dev ens4
+    - name: 10-static.network
+      content: |
+        [Match]
+        MACAddress=52:54:22:ee:ee:03
+
+        [Network]
+        DNS=8.8.8.8
+        Address=10.9.0.3/24
+        Gateway=10.9.0.254
+    - name: 20-dhcp.network
+        [Match]
+        name=e*
+
+        [network]
+        DHCP=yes
+    - name: systemd-networkd.service
+      command: restart
+  etcd2:
+    # generate a new token for each unique cluster from https://discovery.etcd.io/new?size=3
+    discovery: "https://discovery.etcd.io/dfe55038fcfcc2969705b8496d81b8b9"
+    # multi-region and multi-cloud deployments need to use $public_ipv4
+    advertise-client-urls: "http://10.9.0.3:2379"
+    initial-advertise-peer-urls: "http://10.9.0.2:2380,http://10.9.0.1:2380"
+    # listen on both the official ports and the legacy ports
+    # legacy ports can be omitted if your application doesn't depend on them
+    listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
+    listen-peer-urls: "http://10.9.0.3:2380,http://10.9.0.3:7001"
