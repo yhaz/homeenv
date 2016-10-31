@@ -42,3 +42,8 @@ Port 2223
 User core
 StrictHostKeyChecking no
 
+Host coreos3
+HostName localhost
+Port 2224
+User core
+StrictHostKeyChecking no

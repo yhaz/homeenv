@@ -6,8 +6,8 @@ ssh_authorized_keys:
 
 coreos:
   units:
-    - name: etcd2.service
-      command: start
+#    - name: etcd2.service
+#      command: start
     - name: fleet.service
       command: start
     - name: down-interfaces.service
@@ -20,19 +20,19 @@ coreos:
     - name: 10-static.network
       content: |
         [Match]
-        MACAddress=52:54:22:ee:ee:01
+        MACAddress=52:54:22:ee:ee:02
 
         [Network]
         DNS=8.8.8.8
         Address=10.9.0.2/24
-        Gateway=10.9.0.1
+        Gateway=10.9.0.254
     - name: 20-dhcp.network
         [Match]
         name=e*
 
         [network]
         DHCP=yes
-  - name: systemd-networkd.service
+    - name: systemd-networkd.service
       command: restart
 #
 #etcd2:
