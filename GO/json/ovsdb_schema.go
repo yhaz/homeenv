@@ -23,7 +23,7 @@ func readFile(fn string) error {
 }
 
 type  oVSDBSchema struct {
-	Name string 
+	Name string
 	Version string
 	Cksum string
 }
