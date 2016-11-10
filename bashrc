@@ -246,9 +246,9 @@ export RTE_TARGET=x86_64-native-linuxapp-gcc
 alias sb='make sandbox "SANDBOXFLAGS=-o"'
 
 #Go
-export GOROOT=/usr/local/go
 export PATH=$GOROOT/bin:$PATH
 export GOPATH=~/go
+# Add etcd support
+export GOPATH=~/projs/etcd/gopath:$GOPATH
 
-#autojump
-. /usr/share/autojump/autojump.sh
+
