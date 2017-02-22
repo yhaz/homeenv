@@ -26,7 +26,10 @@
 	#suppresscc = self 
 	chainreplyto = false
 	from = Andy Zhou <azhou@ovn.org>
+#	to = jarno@ovn.org
+#	to = joe@ovn.org
 	to = dev@openvswitch.org
+#       cc = nic@opencloud.tech
 #	to = diproiettod@vmware.com
 #	to = joestringer@nicira.com
 #	to = davem@davemloft.net
@@ -34,9 +37,12 @@
 	smtpserver = smtp.gmail.com
 	smtpuser = azhou.ovn@gmail.com
 	smtpssl
+[format]
+headers = "Content-Type: text/plain; charset=\"utf-8\"\nContent-Transfer-Encoding: 8bit\n"
 
 [core]
 	editor=vim
+	abbrev = 12
   	whitespace = trailing-space,space-before-tab
 
 [difftool]
