@@ -178,6 +178,7 @@ alias rmpatch='rm -rf 000*'
 alias git-log-2014='git log --since="2014-1-1" |git shortlog -s -n'
 alias git-log-2015='git log --since="2015-1-1" |git shortlog -s -n'
 alias git-log-2016='git log --since="2016-1-1" |git shortlog -s -n'
+alias git-log-2017='git log --since="2017-1-1" |git shortlog -s -n'
 alias gitpatch='git format-patch --color=never'
 alias gitnetnext='git clone https://kernel.googlesource.com/pub/scm/linux/kernel/git/davem/net-next'
 
