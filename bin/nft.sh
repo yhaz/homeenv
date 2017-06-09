@@ -6,5 +6,10 @@ if [ "$1" == "-d" ]; then
 	shift
 fi
 
+if [ "$1" == "-g" ]; then
+	cmd="gdb --args $cmd --debug all"
+	shift
+fi
+
 $cmd $*
 
