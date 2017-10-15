@@ -1,52 +1,7 @@
-Host *
-forwardX11 yes
+Host gilroy
+	Hostname 97.84.64.254
+	Port 22
 
-Host performance
-Hostname performance.nicira.eng.vmware.com
-User nicira
+Host centos
+	ProxyCommand ssh -W %h:%p gilroy 
 
-Host perf2
-Hostname performance-runner2.nicira.eng.vmware.com
-User azhou
-
-Host perf125
-Hostname prmh-nsx-perf-server125.eng.vmware.com
-User azhou
-
-Host perf126
-Hostname prmh-nsx-perf-server126.eng.vmware.com
-User azhou
-
-Host perf127
-Hostname prmh-nsx-perf-server127.eng.vmware.com
-User azhou
-
-Host perf128
-Hostname prmh-nsx-perf-server128.eng.vmware.com
-User azhou
-
-Host perf129
-Hostname prmh-nsx-perf-server129.eng.vmware.com
-User azhou
-
-Host coreos1
-HostName localhost
-Port 2222
-User core
-StrictHostKeyChecking no
-UserKnownHostsFile /dev/null
-
-Host coreos2
-HostName localhost
-Port 2223
-User core
-StrictHostKeyChecking no
-
-Host mvlinux
-Hostname m.v.remote.mx
-Port 444
-User azhou
-StrictHostKeyChecking no
-PubkeyAuthentication=no
-#PreferredAuthentications=password
-PreferredAuthentications=keyboard-interactive
