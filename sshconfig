@@ -3,5 +3,13 @@ Host gilroy
 	Port 22
 
 Host centos
-	ProxyCommand ssh -W %h:%p gilroy 
+	ProxyCommand ssh -W %h:%p gilroy
 
+Host grubuntu
+	ProxyCommand ssh -W %h:%p gilroy
+
+Host uvm
+	ProxyCommand ssh -W grxps:8222 gilroy
+
+Host ubuntuvm
+	ProxyCommand ssh -W %h:%p gilroy
