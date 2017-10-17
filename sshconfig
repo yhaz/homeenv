@@ -13,3 +13,13 @@ Host uvm
 
 Host ubuntuvm
 	ProxyCommand ssh -W %h:%p gilroy
+
+Host mv
+	Hostname 73.202.55.235
+	Port 22
+
+Host centosmv
+	ProxyCommand ssh -W %h:%p mv
+
+Host rafay1
+	ProxyCommand ssh -W %h:%p mv
