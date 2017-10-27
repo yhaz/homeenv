@@ -26,3 +26,6 @@ Host rafay1
 
 Host rafay2
 	ProxyCommand ssh -W mvxps:8222 mv
+
+Host mvpe
+	ProxyCommand ssh -W %h:%p mv
