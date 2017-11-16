@@ -21,8 +21,12 @@ Host mv
 Host centosmv
 	ProxyCommand ssh -W %h:%p mv
 
-Host rafay1
+Host mvpe
 	ProxyCommand ssh -W %h:%p mv
+
+Host rafay1
+	ProxyCommand ssh -W %h:%p gilroy
 
 Host rafay2
 	ProxyCommand ssh -W mvxps:8222 mv
+
