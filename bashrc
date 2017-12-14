@@ -254,3 +254,6 @@ export GOPATH=~/go
 export GOPATH=~/projs/etcd/gopath:$GOPATH
 
 
+#Kubernetes
+alias k=kubectl
+alias ka='kubectl --all-namespaces'
