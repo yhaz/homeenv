@@ -20,12 +20,12 @@
 
 [user]
 	name="Andy Zhou"
-	email="azhou@ovn.org"
+	email="azhou@rafay.co"
 	
 [sendemail]
 	#suppresscc = self 
 	chainreplyto = false
-	from = Andy Zhou <azhou@ovn.org>
+	from = Andy Zhou <andy@rafay.co>
 #	to = jarno@ovn.org
 #	to = joe@ovn.org
 	to = dev@openvswitch.org

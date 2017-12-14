@@ -24,11 +24,16 @@ Host centosmv
 Host mvpe
 	ProxyCommand ssh -W %h:%p mv
 
-Host rafay1
-	ProxyCommand ssh -W %h:%p gilroy
-
 Host rafay2
 	ProxyCommand ssh -W mvxps:8222 mv
 
 Host mvpe
 	ProxyCommand ssh -W %h:%p mv
+
+Host git.rafay.co
+	HostName git.gtihub.com
+	User git
+	IdentityFile ~/.ssh/rafay/id_rsa
+	IdentitiesOnly yes
+
+
